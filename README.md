@@ -2,10 +2,11 @@
 
 This repository is the public GitHub Pages site for economics conference tracking.
 
-## Public-only model
+## Operating model
 
-Only static website assets and sanitized conference data are intended for this public repository.
-Internal pipeline files and raw working data stay local and are excluded via `.gitignore`.
+Codex automation maintains the conference tracker locally, including planning, evidence collection, merge validation, retry queues, and benchmark checks.
+GitHub Actions is deploy-only: it publishes the already-built `site/` folder to GitHub Pages.
+Local pipeline files and raw working data stay local and are excluded via `.gitignore`.
 
 ## Published contents
 
@@ -13,19 +14,22 @@ Internal pipeline files and raw working data stay local and are excluded via `.g
 - `site/styles.css`
 - `site/app.js`
 - `site/data/conferences.json` (sanitized, public-safe fields only)
-- `.github/workflows/monthly-update-and-deploy.yml` (Pages deployment workflow)
+- `.github/workflows/monthly-update-and-deploy.yml` (deploy-only Pages workflow)
 
 ## Deployment
 
-GitHub Actions deploys the `site/` folder to GitHub Pages on:
+GitHub Actions deploys the `site/` folder to GitHub Pages only. It does not refresh conference data.
+
+The workflow runs on:
 
 - `workflow_dispatch`
 - pushes to `main` that change `site/**` or the workflow file
 
 ## Local update flow
 
-1. Run the local staged refresh pipeline, including the Codex-led discovery scan over broad economics CFP searches.
-2. Compare newly discovered Europe-focused future events against the current tracked list and admit only new in-scope conferences.
-3. Regenerate `site/data/conferences.json` in sanitized form after validation and benchmark gates pass.
-4. Commit only public files and push to `main`.
-5. Let GitHub Actions deploy the updated site.
+1. Run the staged local refresh flow: `plan_refresh.py`, `suggest_similar_conferences.py`, `codex_research.py`, and `merge_validate.py`.
+2. Complete any blocking Codex retry work from `prepare_codex_retry.py` before publish.
+3. Rebuild `site/data/conferences.json` only after validation passes.
+4. Run `score_benchmark.py` and stop if quality is below the configured threshold.
+5. Use `publish_site.bat` to stage only public site files, then push to `main`.
+6. Let GitHub Actions deploy the updated site.

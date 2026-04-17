@@ -1,4 +1,4 @@
-name: monthly-update-and-deploy
+name: deploy-site
 
 on:
   workflow_dispatch:
