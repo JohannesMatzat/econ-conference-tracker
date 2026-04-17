@@ -1,4 +1,4 @@
-# Econ Conference Tracker (Public Site)
+# Econ Conference Tracker
 
 This repository is the public GitHub Pages site for economics conference tracking.
 
