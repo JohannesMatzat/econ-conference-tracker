@@ -13,3 +13,5 @@ conference-tracker-codex-starter/
 /data/
 /requirements.txt
 /publish_site.bat
+/config/
+/skills/
