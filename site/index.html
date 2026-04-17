@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Econ Conference Tracker</title>
+  <meta name="description" content="Static tracker for economics conferences, workshops, and summer schools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="bg-orb orb-a" aria-hidden="true"></div>
+  <div class="bg-orb orb-b" aria-hidden="true"></div>
+  <header class="hero">
+    <h1>Econ Conference Tracker</h1>
+    <p class="hero-subtitle">
+      Open calls and non-active conferences for Europe-focused economics fields.
+    </p>
+    <div class="meta" id="metaLine">Loading conference data...</div>
+  </header>
+
+  <main class="page">
+    <section class="controls" aria-label="Filters and sorting">
+      <label class="control">
+        <span>Keyword</span>
+        <input id="keywordInput" type="search" placeholder="Search name, city, country, notes...">
+      </label>
+      <label class="control">
+        <span>Field</span>
+        <select id="fieldSelect">
+          <option value="">All fields</option>
+        </select>
+      </label>
+      <label class="control">
+        <span>Sort</span>
+        <select id="sortSelect">
+          <option value="deadline_asc">Upcoming deadline</option>
+          <option value="deadline_desc">Latest deadline</option>
+          <option value="name_asc">Conference name A-Z</option>
+          <option value="name_desc">Conference name Z-A</option>
+        </select>
+      </label>
+      <button id="resetFiltersBtn" class="reset-btn" type="button">Reset</button>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2>Open Calls</h2>
+        <p id="openCount" class="count">0</p>
+      </div>
+      <div class="table-wrap">
+        <table class="conference-table">
+          <thead>
+            <tr>
+              <th>Conference</th>
+              <th>Field</th>
+              <th>Location</th>
+              <th>Dates</th>
+              <th>Deadline</th>
+              <th>Website</th>
+            </tr>
+          </thead>
+          <tbody id="openTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2>Non-Active Calls</h2>
+        <p id="nonActiveCount" class="count">0</p>
+      </div>
+      <div class="table-wrap">
+        <table class="conference-table">
+          <thead>
+            <tr>
+              <th>Conference</th>
+              <th>Field</th>
+              <th>Location</th>
+              <th>Dates</th>
+              <th>Deadline</th>
+              <th>Website</th>
+            </tr>
+          </thead>
+          <tbody id="nonActiveTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <template id="emptyRowTemplate">
+    <tr>
+      <td class="empty-state" colspan="6">No conferences match the current filters.</td>
+    </tr>
+  </template>
+
+  <script src="./app.js"></script>
+</body>
+</html>

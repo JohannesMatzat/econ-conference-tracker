@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+site/data/*.tmp
+conference-tracker-codex-starter/
+/conference_input_2026-04-15.csv
+
+# Keep internal pipeline assets local-only in a public repo
+/AGENTS.md
+/docs/
+/scripts/
+/data/
+/requirements.txt
