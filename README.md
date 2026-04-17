@@ -24,7 +24,8 @@ GitHub Actions deploys the `site/` folder to GitHub Pages on:
 
 ## Local update flow
 
-1. Update local internal data/pipeline files (kept outside this public repo scope).
-2. Regenerate `site/data/conferences.json` in sanitized form.
-3. Commit only public files and push to `main`.
-4. Let GitHub Actions deploy the updated site.
+1. Run the local staged refresh pipeline, including the Codex-led discovery scan over broad economics CFP searches.
+2. Compare newly discovered Europe-focused future events against the current tracked list and admit only new in-scope conferences.
+3. Regenerate `site/data/conferences.json` in sanitized form after validation and benchmark gates pass.
+4. Commit only public files and push to `main`.
+5. Let GitHub Actions deploy the updated site.
