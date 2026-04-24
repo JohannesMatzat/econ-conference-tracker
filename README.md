@@ -1,6 +1,6 @@
 # Econ Conference Tracker
 
-This repository is the public GitHub Pages site for economics conference tracking.
+This repository is the public GitHub Pages site for economics conference tracking. Visit the [website](https://johannesmatzat.github.io/econ-conference-tracker/).
 
 ## Operating model
 
