@@ -209,9 +209,11 @@ function isIsoDate(value) {
 }
 
 function renderMeta() {
-  const generatedLabel = state.generatedAt ? formatDateTime(state.generatedAt) : "unknown";
-  const runDateLabel = state.runDate || "unknown";
-  elements.metaLine.textContent = `Run date: ${runDateLabel} | Last generated: ${generatedLabel}`;
+  // Compare calendar dates because the run date has no time component.
+  const dates = [state.runDate, state.generatedAt.slice(0, 10)]
+    .filter(isIsoDate)
+    .sort();
+  elements.metaLine.textContent = `Last updated: ${dates[0] || "unknown"}`;
 }
 
 function renderCounts(openCount, nonActiveCount) {
@@ -302,20 +304,6 @@ function deadlineLabel(row) {
     return row.submission_deadline_primary;
   }
   return row.submission_deadlines_text || "";
-}
-
-function formatDateTime(iso) {
-  const parsed = new Date(iso);
-  if (Number.isNaN(parsed.getTime())) {
-    return iso;
-  }
-  return parsed.toLocaleString(undefined, {
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 }
 
 function safeText(value) {
